@@ -93,10 +93,13 @@ a:hover {
   width: 100%;
   box-sizing: border-box;
   border-radius: 6px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  background-color: #cccec5;
 }
 
-.hero-text {
+.hero-text,
+.main-poster-text,
+.telecharger {
   text-align: center;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   border: 1px solid #212529;
@@ -104,9 +107,11 @@ a:hover {
   padding: 20px; /* Ajouter un peu d'espace à l'intérieur de la boîte */
 }
 
-.hero-container {
+.hero-container,
+.main-poster-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
   grid-auto-rows: auto;
+  margin-bottom: 15px; /* Ajouter un peu d'espace entre les sections */
 }
