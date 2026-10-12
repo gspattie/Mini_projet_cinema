@@ -1,0 +1,112 @@
+/* Optimisation de la mise en place sur mobile, 600px ou moins */
+@media only screen and (max-width: 600px) {
+
+    .top-bar {
+        flex-direction: column;
+    }
+
+    .logo-box {
+        flex: none;
+        width: 100%;
+        aspect-ratio: auto;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;     /* forcer les cartes sur une colonne sur petit écran */
+    }
+
+    .product-card img {
+        height: auto;
+        aspect-ratio: auto; /* Proportions naturelles de l'image */
+    }
+}
+
+/* Optimisation sur tablette (601px à 991px) */
+@media only screen and (min-width: 601px) and (max-width: 991px) {
+
+        .product-card img {
+        height: auto;
+        aspect-ratio: auto; /* Proportions naturelles de l'image */
+    }
+}
+
+/* Optimisation pour grands écrans de 992px ou plus */
+@media only screen and (min-width: 992px) {
+    }
+
+
+a:hover {
+  outline: 1px solid #212529;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.light {
+  font-weight: 300;
+}
+
+.semi-bold {
+  font-weight: 600;
+}
+
+.extra-bold {
+  font-weight: 800;
+}
+
+.logo-box {
+  flex: 1;
+  border: 1px solid #212529;
+  padding: 10px;
+  box-sizing: border-box; /* Empeche le padding de deborder */
+  display: flex; /* Flex  pour aligner le contenu au centre de chaque boite */
+  align-items: center; /* contenu centré verticalement */
+  text-align: center;
+  border-radius: 6px;
+  justify-content: center; /* contenu centré horizontalement */
+  width: 100%;
+  height: 400px;
+  margin: auto; /* Centrer la boîte du logo horizontalement */
+  background-color: #cccec5; /* Couleur de fond pour la boîte du logo */
+}
+
+.logo-box img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto; /* Assure que l'image garde ses proportions */
+  height: auto; /* Assure que l'image garde ses proportions */
+  object-fit: contain; /* Assure que l'image garde ses proportions */
+}
+
+/* Mise en forme pour la page où se trouve actuellement l'utilisateur */
+.nav-row a.active {
+  background-color: #e0e0e0;
+  font-weight: bold;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 4px 8px;
+}
+
+.nav-row {
+  display: flex;
+  padding: 10px 0 10px 10px;
+  border: 1px solid #212529;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.hero-text {
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border: 1px solid #212529;
+  border-radius: 6px;
+  padding: 20px; /* Ajouter un peu d'espace à l'intérieur de la boîte */
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  grid-auto-rows: auto;
+}
