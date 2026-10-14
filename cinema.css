@@ -115,3 +115,7 @@ a:hover {
   grid-auto-rows: auto;
   margin-bottom: 15px; /* Ajouter un peu d'espace entre les sections */
 }
+
+.hidden {
+  display: none !important;
+}
