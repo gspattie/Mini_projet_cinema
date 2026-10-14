@@ -35,6 +35,7 @@ async function loadMoreFilms() {
                 for (let i =0; i < data.Search.length; i += 2) {
                     const movie1 = data.Search[i];
                     const movie2 = data.Search[i + 1];
+                    console.log(data.Search[i]); // Log pour vérifier les films récupérés
 
                     if (!movie1) continue;
 
@@ -43,6 +44,17 @@ async function loadMoreFilms() {
 
                     const poster1 = movie1.Poster !== "N/A" ? movie1.Poster : "Image_Library/placeholder.jpg";
                     const poster2 = movie2 && movie2.Poster !== "N/A" ? movie2.Poster : "Image_Library/placeholder.jpg";
+
+                    const plotUrl1 = `https://www.omdbapi.com/?apikey=${apiKey}&i=${movie1.imdbID}&plot=short`;
+                    const plotUrl2 = movie2 ? `https://www.omdbapi.com/?apikey=${apiKey}&i=${movie2.imdbID}&plot=short` : null;
+
+                    const plotResponse1 = await fetch(plotUrl1);
+                    const plotData1 = await plotResponse1.json();
+                    const plot1 = plotData1.Plot !== "N/A" ? plotData1.Plot : "Description du film non disponible.";
+
+                    const plotResponse2 = movie2 ? await fetch(plotUrl2) : null;
+                    const plotData2 = movie2 && plotResponse2 ? await plotResponse2.json() : null;
+                    const plot2 = movie2 && plotData2 ? (plotData2.Plot !== "N/A" ? plotData2.Plot : "Description du film non disponible.") : null;
                 
                     if (rowIndex % 2 === 0) {
                         let rowHTML = `
@@ -52,7 +64,7 @@ async function loadMoreFilms() {
                             <div class="main-poster-text">
                                 <article>
                                     <h3>${movie1.Title}</h3>
-                                    <p>Description du film bidon left.</p>
+                                    <p>${plot1}</p>
                                 </article>
                             </div>
                         `;
@@ -65,7 +77,7 @@ async function loadMoreFilms() {
                             <div class="main-poster-text">
                                 <article>
                                     <h3>${movie2.Title}</h3>
-                                    <p>Description du film bidon right.</p>
+                                    <p>${plot2}</p>
                                 </article>
                             </div>
                         `;
@@ -76,7 +88,7 @@ async function loadMoreFilms() {
                             <div class="main-poster-text">
                                 <article>
                                     <h3>${movie1.Title}</h3>
-                                    <p>Description du film bidon left.</p>
+                                    <p>${plot1}</p>
                                 </article>
                             </div>
                             <div class="logo-box">
@@ -89,7 +101,7 @@ async function loadMoreFilms() {
                             <div class="main-poster-text">
                                 <article>
                                     <h3>${movie2.Title}</h3>
-                                    <p>Description du film bidon right.</p>
+                                    <p>${plot2}</p>
                                 </article>
                             </div>
                             <div class="logo-box">
