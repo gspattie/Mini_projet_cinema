@@ -2,7 +2,7 @@ let isLoading = false;
 let currentPage = 1;
 
 const apiKey = "ef47e19e"; // ma clé API OMDb
-const searchQuery = "action"; // exemple de recherche
+const searchQuery = "love"; // exemple de recherche
 
 const loadingIndicator = document.getElementById("loading-message");
 const container = document.getElementById("extra-films-container");
@@ -24,7 +24,7 @@ async function loadMoreFilms() {
         // ----------------------------
 
         try {
-            const apiUrl = `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchQuery}&type=movie&page=${currentPage}`;
+            const apiUrl = `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchQuery}&y=2025&type=movie&page=${currentPage}`;
 
             const response = await fetch(apiUrl);
             const data = await response.json();
@@ -35,7 +35,11 @@ async function loadMoreFilms() {
                 for (let i =0; i < data.Search.length; i += 2) {
                     const movie1 = data.Search[i];
                     const movie2 = data.Search[i + 1];
-                    console.log(data.Search[i]); // Log pour vérifier les films récupérés
+
+                    console.log("Movie 1:", movie1); // Log pour vérifier le premier film
+                    if (movie2) {
+                        console.log("Movie 2:", movie2); // Log pour vérifier le deuxième film
+                    }
 
                     if (!movie1) continue;
 
@@ -65,6 +69,7 @@ async function loadMoreFilms() {
                                 <article>
                                     <h3>${movie1.Title}</h3>
                                     <p>${plot1}</p>
+                                    <a href="movie.html?id=${movie1.imdbID}" class="btn-details">En savoir plus</a>
                                 </article>
                             </div>
                         `;
@@ -78,6 +83,7 @@ async function loadMoreFilms() {
                                 <article>
                                     <h3>${movie2.Title}</h3>
                                     <p>${plot2}</p>
+                                    <a href="movie.html?id=${movie2.imdbID}" class="btn-details">En savoir plus</a>
                                 </article>
                             </div>
                         `;
@@ -89,6 +95,7 @@ async function loadMoreFilms() {
                                 <article>
                                     <h3>${movie1.Title}</h3>
                                     <p>${plot1}</p>
+                                    <a href="movie.html?id=${movie1.imdbID}" class="btn-details">En savoir plus</a>
                                 </article>
                             </div>
                             <div class="logo-box">
@@ -102,6 +109,7 @@ async function loadMoreFilms() {
                                 <article>
                                     <h3>${movie2.Title}</h3>
                                     <p>${plot2}</p>
+                                    <a href="movie.html?id=${movie2.imdbID}" class="btn-details">En savoir plus</a>
                                 </article>
                             </div>
                             <div class="logo-box">
