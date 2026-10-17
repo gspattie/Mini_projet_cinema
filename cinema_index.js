@@ -8,20 +8,126 @@ const loadingIndicator = document.getElementById("loading-message");
 const container = document.getElementById("extra-films-container");
 const loadBtn = document.getElementById("load-more-btn");
 
+// Array de films pour les "films de la semaine"
+const featuredMovies = [
+    "tt33764258", // The Odyssey
+    "tt12042730", // Project Hail Mary
+    "tt28535715", // Whalefall
+    "tt29355505", // Toy Story 5
+];
+
+async function loadFeaturedMovies() {
+    const featuredContainer = document.getElementById("featured-movies-container");
+    if (!featuredContainer) return;
+
+    // Fonction pour récuperer un seul film et retourner ses données
+    async function fetchMovieData(id) {
+        try {
+            const res = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${id}&plot=short`);
+            const movie = await res.json();
+            if (movie.Response === "True") {
+                return {
+                    title: movie.Title,
+                    year: movie.Year,
+                    poster: movie.Poster !== "N/A" ? movie.Poster : "Image_Library/placeholder.jpg",
+                    plot: movie.Plot !== "N/A" ? movie.Plot : "Description du film non disponible",
+                    id: movie.imdbID
+                };
+            }
+        } catch (error) {
+            console.error(`Erreur 3 pour le film ${id}`, error)
+        }
+        return null;
+    }
+
+    const odyssey = await fetchMovieData(featuredMovies[0]);
+    const hailMary = await fetchMovieData(featuredMovies[1]);
+    const whalefall = await fetchMovieData(featuredMovies[2]);
+    const toyStory = await fetchMovieData(featuredMovies[3]);
+
+    let htmlContent = "";
+
+    if (odyssey) {
+        htmlContent += `
+            <div class="main-poster-container">
+                <div class="logo-box">
+                    <img src="${odyssey.poster}" alt="${odyssey.title}" onerror="this.src='Image_Library/placeholder.jpg'"/>
+                </div>
+                <div class="main-poster-text">
+                    <article>
+                        <h3 class="extra-bold">${odyssey.title} (${odyssey.year})</h3>
+                        <p>${odyssey.plot}</p>
+                        <a href="movie.html?id=${odyssey.id}" class="btn-details">En savoir plus</a>
+                    </article>
+                </div>
+            </div>    
+        `;
+    }
+
+    if (hailMary && whalefall) {
+        htmlContent += `
+            <h3 class="section-subtitle">Aussi à l'affiche cette semaine</h3>
+            <div class="main-poster-container">
+                <div class="logo-box">
+                    <img src="${hailMary.poster}" alt="${hailMary.title}" onerror="this.src='Image_Library/placeholder.jpg'"/>
+                </div>
+                <div class="main-poster-text">
+                    <article>
+                        <h3 class="extra-bold">${hailMary.title} (${hailMary.year})</h3>
+                        <p>${hailMary.plot}</p>
+                        <a href="movie.html?id=${hailMary.id}" class="btn-details">En savoir plus</a>
+                    </article>
+                </div>
+                <div class="logo-box">
+                    <img src="${whalefall.poster}" alt="${whalefall.title}" onerror="this.src='Image_Library/placeholder.jpg'"/>
+                </div>
+                <div class="main-poster-text">
+                    <article>
+                        <h3 class="extra-bold">${whalefall.title} (${whalefall.year})</h3>
+                        <p>${whalefall.plot}</p>
+                        <a href="movie.html?id=${whalefall.id}" class="btn-details">En savoir plus</a>
+                    </article>
+                </div>
+            </div>  
+        `;
+    }
+    
+    if (toyStory) {
+        htmlContent += `
+            <div class="section-subtitle">
+                <h3>Spéciale Famille - Vacances de la Toussaint</h3>
+                <p>Avoue, c'est plus temptant qu'une deuxième cimietière sous la pluie</p>
+            </div>    
+            <div class="main-poster-container">
+                <div class="logo-box">
+                    <img src="${toyStory.poster}" alt="${toyStory.title}" onerror="this.src='Image_Library/placeholder.jpg'"/>
+                </div>
+                <div class="main-poster-text">
+                    <article>
+                        <h3 class="extra-bold">${toyStory.title} (${toyStory.year})</h3>
+                        <p>${toyStory.plot}</p>
+                        <a href="movie.html?id=${toyStory.id}" class="btn-details">En savoir plus</a>
+                    </article>
+                </div>
+            </div>    
+        `;
+    }
+
+    featuredContainer.innerHTML = htmlContent;
+
+}
+
 async function loadMoreFilms() {
-        if (isLoading) {
-            console.warn("Chargement déjà en cours. Veuillez patienter.");
-            return;
-        }
+    if(isLoading) return;
+    isLoading = true;
 
-        isLoading = true;
-        if (loadingIndicator) {
-            loadingIndicator.classList.remove("hidden");
-        }
+    if (loadingIndicator) {
+        loadingIndicator.classList.remove("hidden");
+    }
 
-        // --- TEMPORARY TEST DELAY ---
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        // ----------------------------
+    // --- TEMPORARY TEST DELAY ---
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    // ----------------------------
 
         try {
             const apiUrl = `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchQuery}&y=2025&type=movie&page=${currentPage}`;
@@ -117,26 +223,31 @@ async function loadMoreFilms() {
                             </div>
                         `;
                     }
-                newRow.innerHTML = rowHTML;
-            }
+                    newRow.innerHTML = rowHTML;
+                }
                 container.appendChild(newRow);
                 rowIndex++;
-        }
-
-                currentPage++;
-            } else {
-                console.log("No more movies found");
             }
-        } catch (error) {
-            console.error("Erreur lors du chargement des films:", error);
-        } finally {
+
+            currentPage++;
+        } else {
+            console.log("No more movies found");
+        }
+    } catch (error) {
+        console.error("Erreur lors du chargement des films:", error);
+    } finally {
             if (loadingIndicator) {
                 loadingIndicator.classList.add("hidden");
             }
             isLoading = false;
-        }
     }
-
-if (loadBtn) {
-    loadBtn.addEventListener("click", loadMoreFilms);
 }
+
+// Appel de la fonction pour charger  les films de la semaine
+document.addEventListener("DOMContentLoaded", () => {
+    loadFeaturedMovies();
+
+    if (loadBtn) {
+        loadBtn.addEventListener("click", loadMoreFilms);
+    }
+});

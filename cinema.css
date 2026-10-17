@@ -95,15 +95,34 @@ a:hover {
   background-color: #cccec5;
 }
 
-.hero-text,
-.main-poster-text,
+
+.section-subtitle,
 .telecharger {
   text-align: center;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   border: 1px solid #212529;
   border-radius: 6px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Ombre subtile pour un effet de profondeur */
-  padding: 20px; /* Ajouter un peu d'espace à l'intérieur de la boîte */
+  padding: 10px; /* Ajouter un peu d'espace à l'intérieur de la boîte */
+  margin-bottom: 15px;
+}
+
+.section-subtitle h3,
+.section-subtitle P,
+.telecharger h3,
+.telecharger p {
+  margin: 0;
+  padding: 2px 0;
+}
+
+.hero-text,
+.main-poster-text {
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border: 1px solid #212529;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Ombre subtile pour un effet de profondeur */
+  padding: 10px; /* Ajouter un peu d'espace à l'intérieur de la boîte */
 }
 
 .hero-container,
