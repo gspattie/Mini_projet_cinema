@@ -30,7 +30,7 @@ async function loadMovieDetails() {
             if (movie.Response === "True") {
             // Affichage des détails du film dans la page
             document.getElementById("movie-title").textContent = movie.Title;
-            document.getElementById("movie-poster").src = movie.Poster !== "N/A" ? movie.Poster : "Image_Library/placeholder.jpg";
+            document.getElementById("movie-poster").src = movie.Poster !== "N/A" ? movie.Poster : "Image_Library/placeholder.png";
             document.getElementById("movie-plot").textContent = movie.Plot;
             document.getElementById("movie-director").textContent = `Réalisateur: ${movie.Director}`;
             document.getElementById("movie-actors").textContent = `Acteurs: ${movie.Actors}`;

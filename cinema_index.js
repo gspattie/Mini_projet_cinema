@@ -29,7 +29,7 @@ async function loadFeaturedMovies() {
                 return {
                     title: movie.Title,
                     year: movie.Year,
-                    poster: movie.Poster !== "N/A" ? movie.Poster : "Image_Library/placeholder.jpg",
+                    poster: movie.Poster !== "N/A" ? movie.Poster : "Image_Library/placeholder.png",
                     plot: movie.Plot !== "N/A" ? movie.Plot : "Description du film non disponible",
                     id: movie.imdbID
                 };
@@ -118,6 +118,7 @@ async function loadFeaturedMovies() {
 }
 
 async function loadMoreFilms() {
+
     if(isLoading) return;
     isLoading = true;
 
