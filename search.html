@@ -7,22 +7,53 @@
     <title>Rechercher vos films</title>
   </head>
   <body>
-    <div class="nav-row">
-      <nav>
-          <a class="light" href="index.html" >Page d'Accueil</a> |
+    <header>
+      <div class="nav-row">
+        <nav>
+          <a class="light" href="index.html">Page d'Accueil</a> |
           <a class="light" href="movie.html" target="_blank">Movie Information</a> |
           <a class="light active" href="search.html" target="_blank">Search Page</a>
-      </nav>
-    </div>
-        <footer>
-        <div class="nav-row">
-            <nav>
-                <a class="light active" href="#">Retour en haut</a> |
-                <a class="light" href="movie.html" target="_blank">Movie Information</a> |
-                <a class="light" href="search.html" target="_blank">Search Page</a>
-            </nav>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="main-poster-container">
+        <div class="main-poster-text">
+          <h3 class="semi-bold">Bienvenu sur notre page de recherche</h3>
+          <p>Utilisez notre bzrre de recherche pour trouver des informations sur tous les films dans notre base de données</p>
         </div>
+        <div class="search-container">
+          <form id="search-form">
+            <input id="input-text" type="text" placeholder="Titre" name="search" required>
+            <input id="input-year" type="text" placeholder="Année de sortie" name="year" pattern="\d{4}">
+            <select id="content-type" name="content-type" placeholder="movie, series, episode">
+              <option value="movie">movie</option>
+              <option value="series">series</option>
+              <option value="episode">episode</option>
+            </select>
+            <button id="search-btn" type="submit">Appuyez le bouton</button>
+          </form>
+          <p>Entrez ici vos paramètres de recherche.</p>
+          <p>Seule le titre est obligatoire.</p>
+          <p>L'année, si utilisée, doit être au format yyyy</p>
+          <p>Le résumé peut être affiché en court (short) ou complet (full)</p>
+        </div>
+      </div>
+      <section>
+        <div id="search-result">
+          <!-- stick the search result gubbins here -->
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="nav-row">
+        <nav>
+          <a class="light active" href="#">Retour en haut</a> |
+          <a class="light" href="movie.html" target="_blank">Movie Information</a> |
+          <a class="light" href="search.html" target="_blank">Search Page</a>
+        </nav>
+      </div>
     </footer>
-    <script src="day2_aft_ex3.js"></script>
+    <script src="cinema_search.js"></script>
   </body>
 </html>

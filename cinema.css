@@ -66,6 +66,7 @@ a:hover {
   text-align: center;
   justify-content: center; /* contenu centré horizontalement */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Ombre subtile pour un effet de profondeur */
+  height: 100%;
 }
 
 .logo-box img {
@@ -116,7 +117,8 @@ a:hover {
 }
 
 .hero-text,
-.main-poster-text {
+.main-poster-text,
+.search-container {
   text-align: center;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   border: 1px solid #212529;
@@ -130,8 +132,20 @@ a:hover {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
-  grid-auto-rows: auto;
+  grid-auto-rows: 1fr;
+  align-items: stretch;
   margin-bottom: 15px; /* Ajouter un peu d'espace entre les sections */
+  gap: 2rem;
+}
+
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #f4f4f4 ;
+  border: 1px solid #ccc;
+  padding: 15px;
+  text-align: center;
+  overflow: hidden;
 }
 
 .hidden {
