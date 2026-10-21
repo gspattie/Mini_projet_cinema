@@ -1,6 +1,6 @@
 # 🎬 Mini-Projet Cinéma
 
-A modern, responsive web application for a local community cinema (*cinéma de proximité*), featuring schedule information, movie details, and an interactive search interface.
+A modern, responsive web application for a local community cinema (Le P'tit Projecteur), featuring schedule information, movie details, and an interactive search interface.
 
 ## 🚀 Features
 * **Responsive Hero Section:** Split-layout design adapting seamlessly from mobile screens to large desktop displays.
@@ -12,10 +12,16 @@ A modern, responsive web application for a local community cinema (*cinéma de p
 * **Git & GitHub** for version control and branch management
 
 ## 📂 Project Structure
-```text
+
 Mini-Projet-Cinéma/
 ├── index.html        # Homepage
 ├── movie.html        # Movie information page
 ├── search.html       # Search interface
 ├── cinema.css        # Main stylesheet
+├── cinema_index.js   # javascript for index page
+├── cinema_movie.js   # javascript for movie page
+├── cinema_search.js  # javascript for search page
 └── Image_Library/    # Assets (logos, posters)
+
+## 📂 Link to github repository
+https://github.com/gspattie/Mini_projet_cinema.git
