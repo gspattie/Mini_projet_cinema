@@ -18,11 +18,14 @@
     </header>
     <main>
       <div class="main-poster-container">
-        <div class="main-poster-text">
-          <h3 class="semi-bold">Bienvenu sur notre page de recherche</h3>
-          <p>Utilisez notre bzrre de recherche pour trouver des informations sur tous les films dans notre base de données</p>
+        <div class="search-logo">
+          <h3 class="bold">Bienvenu sur notre page de recherche</h3>
+          <p class="semi-bold">Utilisez notre barre de recherche pour trouver des informations sur tous les films dans notre base de données</p>
         </div>
         <div class="search-container">
+          <p>Entrez ici vos paramètres de recherche.</p>
+          <p>Seule le titre ou un mot-clé est obligatoire.</p>
+          <p>L'année, si utilisée, doit être au format yyyy</p>
           <form id="search-form">
             <input id="input-text" type="text" placeholder="Titre" name="search" required>
             <input id="input-year" type="text" placeholder="Année de sortie" name="year" pattern="\d{4}">
@@ -31,12 +34,8 @@
               <option value="series">series</option>
               <option value="episode">episode</option>
             </select>
-            <button id="search-btn" type="submit">Appuyez le bouton</button>
+            <button id="search-btn" type="submit">Appuyez ici</button>
           </form>
-          <p>Entrez ici vos paramètres de recherche.</p>
-          <p>Seule le titre est obligatoire.</p>
-          <p>L'année, si utilisée, doit être au format yyyy</p>
-          <p>Le résumé peut être affiché en court (short) ou complet (full)</p>
         </div>
       </div>
       <section>
