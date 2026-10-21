@@ -26,18 +26,34 @@ async function loadMovieDetails() {
             const apiUrl = `https://www.omdbapi.com/?apikey=${apiKey}&i=${movieID}&plot=full`;
             const response = await fetch(apiUrl);
             const movie = await response.json();
-
+            
             if (movie.Response === "True") {
-            // Affichage des détails du film dans la page
-            document.getElementById("movie-title").textContent = movie.Title;
-            document.getElementById("movie-poster").src = movie.Poster !== "N/A" ? movie.Poster : "Image_Library/placeholder.png";
-            document.getElementById("movie-plot").textContent = movie.Plot;
-            document.getElementById("movie-director").textContent = `Réalisateur: ${movie.Director}`;
-            document.getElementById("movie-actors").textContent = `Acteurs: ${movie.Actors}`;
-            document.getElementById("movie-genre").textContent = `Genre: ${movie.Genre}`;
-            document.getElementById("movie-year").textContent = `Année: ${movie.Year}`;
-            document.getElementById("movie-rating").textContent = `Note IMDb: ${movie.imdbRating}`;
+                // Affichage des détails du film dans la page
+                document.getElementById("movie-title").textContent = movie.Title;
+                document.getElementById("movie-poster").src = movie.Poster !== "N/A" ? movie.Poster : "Image_Library/placeholder.png";
+                document.getElementById("movie-plot").textContent = movie.Plot;
+                document.getElementById("movie-director").textContent = `Réalisateur: ${movie.Director}`;
+                document.getElementById("movie-actors").textContent = `Acteurs: ${movie.Actors}`;
+                document.getElementById("movie-genre").textContent = `Genre: ${movie.Genre}`;
+                document.getElementById("movie-year").textContent = `Année: ${movie.Year}`;
 
+                const rtObj = movie.Ratings ? movie.Ratings.find(r => r.Source === "Rotten Tomatoes") : null;
+                const rtScore = rtObj ? rtObj.Value : "Non Disponible";
+
+                const mcObj = movie.Ratings ? movie.Ratings.find(m => m.Source === "Metacritic") : null;
+                const mcScore = mcObj ? mcObj.Value : "Non Disponible";
+                document.getElementById("movie-ratings").textContent = `Note IMDb: ${movie.imdbRating} | Rotten Tomatoes: ${rtScore} | Metacritic: ${mcScore}`;
+                
+                const dvdDateElement = document.getElementById("movie-dvd");
+                if (dvdDateElement) {
+                    if (movie.DVD && movie.DVD !== "N/A") {
+                        const formattedDate = new Date(movie.DVD).toLocaleDateString("fr-FR");
+                        dvdDateElement.textContent = `Date de sortie sur DVD : ${formattedDate}`;
+                    } else {
+                        dvdDateElement.textContent = "Date de sortie sur DVD : Non disponible";
+                    }
+                }
+                
         } else {
                 console.log("Erreur lors de la récupération des détails du film:", movie.Error);
             }
